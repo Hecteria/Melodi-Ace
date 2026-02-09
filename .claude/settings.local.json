@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__stitch__list_projects",
+      "Bash(python:*)",
+      "Bash(powershell -Command \"Select-String -Path ''mcp-stitch-list_projects-1770572597741.txt'' -Pattern ''sunox'' -AllMatches | ForEach-Object { $_Line.Substring\\(0, [Math]::Min\\(500, $_Line.Length\\)\\) }\")",
+      "mcp__stitch__list_screens",
+      "WebFetch(domain:lh3.googleusercontent.com)",
+      "mcp__stitch__get_screen",
+      "WebFetch(domain:contribution.usercontent.google.com)",
+      "Bash(flutter pub get:*)",
+      "Bash(flutter analyze:*)"
+    ]
+  }
+}
