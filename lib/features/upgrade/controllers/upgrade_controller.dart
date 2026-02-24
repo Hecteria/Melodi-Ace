@@ -9,11 +9,6 @@ class UpgradeController extends ChangeNotifier {
   String get proPrice =>
       _isYearly ? UpgradeData.proPlan.yearlyPrice : UpgradeData.proPlan.monthlyPrice;
 
-  String get proPriceLabel =>
-      _isYearly
-          ? 'Then ${UpgradeData.proPlan.yearlyPrice}/mo. Cancel anytime.'
-          : 'Then ${UpgradeData.proPlan.monthlyPrice}/mo. Cancel anytime.';
-
   void toggleBillingPeriod(bool yearly) {
     if (_isYearly != yearly) {
       _isYearly = yearly;

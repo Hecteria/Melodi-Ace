@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/locale/locale_scope.dart';
 import '../../../core/theme/app_theme.dart';
 import '../controllers/player_controller.dart';
 import '../data/player_data.dart';
@@ -63,7 +64,7 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                         Column(
                           children: [
                             Text(
-                              'Now Playing',
+                              context.l10n.nowPlaying,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall

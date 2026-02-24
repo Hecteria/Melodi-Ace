@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import '../../../core/locale/locale_scope.dart';
+import '../../../core/services/auth_scope.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../playlist_detail/data/playlist_detail_data.dart';
 import '../../playlist_detail/presentation/playlist_detail_screen.dart';
@@ -22,6 +24,23 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  String _greetingLabel(BuildContext context) {
+    switch (_controller.greetingType) {
+      case GreetingType.morning:
+        return context.l10n.greetingMorning;
+      case GreetingType.afternoon:
+        return context.l10n.greetingAfternoon;
+      case GreetingType.evening:
+        return context.l10n.greetingEvening;
+    }
+  }
+
+  String _userName(BuildContext context) {
+    final user = AuthScope.of(context).userModel;
+    if (user?.displayName.isNotEmpty == true) return user!.displayName;
+    return context.l10n.guestName;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            _controller.greeting,
+                            _greetingLabel(context),
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium
@@ -50,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            _controller.userName,
+                            _userName(context),
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium
@@ -96,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 28),
 
                 // Continue Listening
-                _sectionTitle(context, 'Continue Listening'),
+                _sectionTitle(context, context.l10n.continueListening),
                 const SizedBox(height: 16),
                 SizedBox(
                   height: 210,
@@ -113,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 28),
 
                 // Made for You
-                _sectionTitle(context, 'Made for You'),
+                _sectionTitle(context, context.l10n.madeForYou),
                 const SizedBox(height: 16),
                 SizedBox(
                   height: 200,
@@ -130,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 28),
 
                 // Your Recent Creations
-                _sectionTitle(context, 'Your Recent Creations'),
+                _sectionTitle(context, context.l10n.yourRecentCreations),
                 const SizedBox(height: 16),
                 _buildRecentCreationsSection(context),
                 const SizedBox(height: 100),
@@ -171,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
           ),
           Text(
-            'See All',
+            context.l10n.seeAll,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,
@@ -271,8 +290,8 @@ class _HomeScreenState extends State<HomeScreen> {
       BuildContext context, ContinueListeningTrack track) {
     final minutesLeft = track.secondsLeft ~/ 60;
     final secsLeft = track.secondsLeft % 60;
-    final timeLeft =
-        '$minutesLeft:${secsLeft.toString().padLeft(2, '0')} left';
+    final timeStr = '$minutesLeft:${secsLeft.toString().padLeft(2, '0')}';
+    final timeLeft = context.l10n.timeLeft(timeStr);
 
     return GestureDetector(
       onTap: () => _openPlaylist(PlaylistInfo(
@@ -448,7 +467,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: AppColors.primary, size: 36),
               const SizedBox(height: 12),
               Text(
-                'Create your first AI track',
+                context.l10n.createFirstTrack,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -456,7 +475,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Describe a mood and let AI compose for you',
+                context.l10n.createFirstTrackDesc,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: AppColors.white54,
                     ),
@@ -470,7 +489,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  'Start Creating',
+                  context.l10n.startCreating,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
@@ -499,8 +518,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildRecentCreationCard(
       BuildContext context, RecentCreation creation) {
-    final daysText =
-        creation.daysAgo == 1 ? '1 day ago' : '${creation.daysAgo} days ago';
+    final daysText = creation.daysAgo == 1
+        ? context.l10n.dayAgo
+        : context.l10n.daysAgo(creation.daysAgo);
 
     return GestureDetector(
       onTap: () => _openPlaylist(PlaylistInfo(

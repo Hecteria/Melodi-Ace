@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/locale/locale_scope.dart';
 import '../../../core/theme/app_theme.dart';
 import '../controllers/playlist_detail_controller.dart';
 import '../data/playlist_detail_data.dart';
@@ -200,7 +201,7 @@ class _PlaylistDetailScreenState extends State<PlaylistDetailScreen> {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    '${playlist.trackCount} tracks',
+                    context.l10n.tracksCount(playlist.trackCount),
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import '../../../core/locale/locale_scope.dart';
 import '../../../core/theme/app_theme.dart';
-import '../../../shell/main_shell.dart';
 
 class OnboardingScreen extends StatelessWidget {
-  const OnboardingScreen({super.key});
+  final VoidCallback? onGetStarted;
+
+  const OnboardingScreen({super.key, this.onGetStarted});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class OnboardingScreen extends StatelessWidget {
                 const SizedBox(height: 48),
                 // Title
                 Text(
-                  'Create the\nSoundtrack of\nYour Life',
+                  context.l10n.onboardingTitle,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w700,
@@ -63,7 +65,7 @@ class OnboardingScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 // Subtitle
                 Text(
-                  'Experience AI-powered music tailored to your mood, style, and every unique moment.',
+                  context.l10n.onboardingSubtitle,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: AppColors.white70,
@@ -93,13 +95,7 @@ class OnboardingScreen extends StatelessWidget {
                       ],
                     ),
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (_) => const MainShell(),
-                          ),
-                        );
-                      },
+                      onPressed: onGetStarted,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
@@ -107,44 +103,15 @@ class OnboardingScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      child: const Text(
-                        'Get Started',
-                        style: TextStyle(
+                      child: Text(
+                        context.l10n.getStarted,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                // Login link
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Already have an account? ',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.white54,
-                          ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (_) => const MainShell(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Log In',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    ),
-                  ],
                 ),
                 const SizedBox(height: 40),
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/locale/locale_scope.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../playlist_detail/data/playlist_detail_data.dart';
 import '../../playlist_detail/presentation/playlist_detail_screen.dart';
@@ -39,7 +40,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Explore',
+                        context.l10n.explore,
                         style:
                             Theme.of(context).textTheme.headlineSmall?.copyWith(
                                   fontWeight: FontWeight.w700,
@@ -73,7 +74,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'Search genres, moods, AI models...',
+                            context.l10n.searchPlaceholder,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium
@@ -96,7 +97,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                   color: AppColors.primary, size: 16),
                               const SizedBox(width: 4),
                               Text(
-                                'Voice',
+                                context.l10n.voice,
                                 style: TextStyle(
                                   color: AppColors.primary,
                                   fontSize: 11,
@@ -113,7 +114,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 const SizedBox(height: 28),
 
                 // Trending Now
-                _sectionTitle(context, 'Trending Now'),
+                _sectionTitle(context, context.l10n.trendingNow),
                 const SizedBox(height: 14),
                 SizedBox(
                   height: 72,
@@ -130,7 +131,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 const SizedBox(height: 28),
 
                 // Browse by Mood
-                _sectionTitle(context, 'Browse by Mood'),
+                _sectionTitle(context, context.l10n.browseByMood),
                 const SizedBox(height: 14),
                 // Mood filter chips
                 SizedBox(
@@ -206,7 +207,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 const SizedBox(height: 32),
 
                 // AI Sound Engines
-                _sectionTitle(context, 'AI Sound Engines'),
+                _sectionTitle(context, context.l10n.aiSoundEngines),
                 const SizedBox(height: 14),
                 SizedBox(
                   height: 155,
@@ -228,7 +229,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 const SizedBox(height: 32),
 
                 // Genre Worlds
-                _sectionTitle(context, 'Genre Worlds'),
+                _sectionTitle(context, context.l10n.genreWorlds),
                 const SizedBox(height: 14),
                 SizedBox(
                   height: 120,
@@ -249,13 +250,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 const SizedBox(height: 32),
 
                 // Top Community Creations
-                _sectionTitle(context, 'Top Community Creations'),
+                _sectionTitle(context, context.l10n.topCommunityCreations),
                 const SizedBox(height: 14),
                 _buildCommunityList(context),
                 const SizedBox(height: 32),
 
                 // Curated Collections
-                _sectionTitle(context, 'Curated Collections'),
+                _sectionTitle(context, context.l10n.curatedCollections),
                 const SizedBox(height: 14),
                 SizedBox(
                   height: 190,
@@ -321,7 +322,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 ),
           ),
           Text(
-            'See All',
+            context.l10n.seeAll,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,
@@ -567,7 +568,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     size: 14, color: AppColors.white54),
                 const SizedBox(width: 4),
                 Text(
-                  '$trackCount tracks',
+                  context.l10n.tracksCount(trackCount),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.white54,
                       ),

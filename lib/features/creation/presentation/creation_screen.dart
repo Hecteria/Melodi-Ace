@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/locale/locale_scope.dart';
 import '../../../core/theme/app_theme.dart';
 import '../controllers/creation_controller.dart';
 import '../data/creation_data.dart';
@@ -42,7 +43,7 @@ class _CreationScreenState extends State<CreationScreen> {
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        'AI Creation Suite',
+                        context.l10n.aiCreationSuite,
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall
@@ -61,7 +62,7 @@ class _CreationScreenState extends State<CreationScreen> {
                           color: AppColors.primary, size: 22),
                       const SizedBox(width: 8),
                       Text(
-                        'Create a Masterpiece',
+                        context.l10n.createMasterpiece,
                         style:
                             Theme.of(context).textTheme.titleMedium?.copyWith(
                                   fontWeight: FontWeight.w600,
@@ -72,7 +73,7 @@ class _CreationScreenState extends State<CreationScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Describe the atmosphere of your track',
+                    context.l10n.describeAtmosphere,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppColors.white54,
                         ),
@@ -91,19 +92,19 @@ class _CreationScreenState extends State<CreationScreen> {
                       maxLines: 4,
                       maxLength: CreationData.maxDescriptionLength,
                       style: const TextStyle(color: Colors.white),
-                      decoration: const InputDecoration(
-                        hintText: 'Enter your track description...',
+                      decoration: InputDecoration(
+                        hintText: context.l10n.trackDescriptionHint,
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(16),
+                        contentPadding: const EdgeInsets.all(16),
                         counterStyle:
-                            TextStyle(color: AppColors.white54),
+                            const TextStyle(color: AppColors.white54),
                       ),
                     ),
                   ),
                   const SizedBox(height: 28),
                   // Genre
                   Text(
-                    'Select Genre',
+                    context.l10n.selectGenre,
                     style:
                         Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w700,
@@ -163,7 +164,7 @@ class _CreationScreenState extends State<CreationScreen> {
                   const SizedBox(height: 28),
                   // Mood
                   Text(
-                    'Musical Mood',
+                    context.l10n.musicalMood,
                     style:
                         Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w700,
@@ -225,7 +226,7 @@ class _CreationScreenState extends State<CreationScreen> {
                   _buildControl(
                     context,
                     icon: Icons.timer_outlined,
-                    label: 'Track Duration',
+                    label: context.l10n.trackDuration,
                     value: _controller.durationLabel,
                   ),
                   const SizedBox(height: 8),
@@ -250,7 +251,7 @@ class _CreationScreenState extends State<CreationScreen> {
                   _buildControl(
                     context,
                     icon: Icons.speed,
-                    label: 'BPM / Tempo',
+                    label: context.l10n.bpmTempo,
                     value: _controller.bpmLabel,
                   ),
                   const SizedBox(height: 8),
@@ -291,9 +292,9 @@ class _CreationScreenState extends State<CreationScreen> {
                       child: ElevatedButton.icon(
                         onPressed: () {},
                         icon: const Icon(Icons.auto_awesome, size: 22),
-                        label: const Text(
-                          'Generate Music',
-                          style: TextStyle(
+                        label: Text(
+                          context.l10n.generateMusic,
+                          style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                         style: ElevatedButton.styleFrom(

@@ -1,0 +1,131 @@
+{
+  "@@locale": "en",
+
+  "onboardingTitle": "Create the\nSoundtrack of\nYour Life",
+  "onboardingSubtitle": "Experience AI-powered music tailored to your mood, style, and every unique moment.",
+  "getStarted": "Get Started",
+
+  "connectionError": "Connection Error",
+  "somethingWentWrong": "Something went wrong.",
+  "retry": "Retry",
+
+  "seeAll": "See All",
+
+  "greetingMorning": "Good Morning",
+  "greetingAfternoon": "Good Afternoon",
+  "greetingEvening": "Good Evening",
+
+  "continueListening": "Continue Listening",
+  "madeForYou": "Made for You",
+  "yourRecentCreations": "Your Recent Creations",
+  "createFirstTrack": "Create your first AI track",
+  "createFirstTrackDesc": "Describe a mood and let AI compose for you",
+  "startCreating": "Start Creating",
+  "dayAgo": "1 day ago",
+  "daysAgo": "{count} days ago",
+  "@daysAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "timeLeft": "{time} left",
+  "@timeLeft": {
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+
+  "explore": "Explore",
+  "searchPlaceholder": "Search genres, moods, AI models...",
+  "voice": "Voice",
+  "trendingNow": "Trending Now",
+  "browseByMood": "Browse by Mood",
+  "aiSoundEngines": "AI Sound Engines",
+  "genreWorlds": "Genre Worlds",
+  "topCommunityCreations": "Top Community Creations",
+  "curatedCollections": "Curated Collections",
+  "tracksCount": "{count} tracks",
+  "@tracksCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "aiCreationSuite": "AI Creation Suite",
+  "createMasterpiece": "Create a Masterpiece",
+  "describeAtmosphere": "Describe the atmosphere of your track",
+  "trackDescriptionHint": "Enter your track description...",
+  "selectGenre": "Select Genre",
+  "musicalMood": "Musical Mood",
+  "trackDuration": "Track Duration",
+  "bpmTempo": "BPM / Tempo",
+  "generateMusic": "Generate Music",
+
+  "yourLibrary": "Your Library",
+  "creations": "Creations",
+  "saved": "Saved",
+  "playingNow": "Playing Now",
+
+  "upgradeToPro": "Upgrade to Pro",
+  "restore": "Restore",
+  "chooseSoundExperience": "Choose Your\nSound Experience",
+  "unlockPremium": "Unlock premium AI models and high-fidelity streaming.",
+  "monthly": "Monthly",
+  "yearlyWithDiscount": "Yearly (Save 20%)",
+  "perMonth": "/month",
+  "startFreeTrial": "Start 7-Day Free Trial",
+  "thenCancelAnytime": "Then {price}/mo. Cancel anytime.",
+  "@thenCancelAnytime": {
+    "placeholders": {
+      "price": { "type": "String" }
+    }
+  },
+  "terms": "Terms",
+  "privacyPolicy": "Privacy Policy",
+  "subscriptionRenewsNote": "Subscription automatically renews unless canceled at least 24 hours before the end of the current period. Manage in Account Settings.",
+
+  "profile": "Profile",
+  "guestName": "Guest",
+  "guestAccount": "Guest Account",
+  "tracksCreated": "Tracks\nCreated",
+  "hoursListened": "Hours\nListened",
+  "aiCredits": "AI\nCredits",
+  "planLabel": "{plan} Plan",
+  "@planLabel": {
+    "placeholders": {
+      "plan": { "type": "String" }
+    }
+  },
+  "freeBadge": "Free",
+  "unlimitedActiveDesc": "Unlimited AI generation active",
+  "upgradeForUnlimited": "Upgrade to Pro for unlimited AI generation",
+  "accountSection": "Account",
+  "preferencesSection": "Preferences",
+  "supportSection": "Support",
+  "signOut": "Sign Out",
+  "appVersion": "Melodi v1.0.0",
+  "browsingAsGuest": "You're browsing as Guest",
+  "signInToSave": "Sign in to save your music across devices",
+  "continueWithGoogle": "Continue with Google",
+
+  "menuEditProfile": "Edit Profile",
+  "menuSubscription": "Subscription",
+  "menuNotifications": "Notifications",
+  "menuPrivacyAndSecurity": "Privacy & Security",
+  "menuAudioQuality": "Audio Quality",
+  "menuAiModel": "AI Model",
+  "menuStorageDownloads": "Storage & Downloads",
+  "menuLanguage": "Language",
+  "menuHelpCenter": "Help Center",
+  "menuAboutMelodi": "About Melodi",
+  "menuRateUs": "Rate Us",
+  "menuShareWithFriends": "Share with Friends",
+
+  "nowPlaying": "Now Playing",
+
+  "navHome": "Home",
+  "navDiscover": "Discover",
+  "navGenerate": "Generate",
+  "navLibrary": "Library",
+  "navProfile": "Profile"
+}

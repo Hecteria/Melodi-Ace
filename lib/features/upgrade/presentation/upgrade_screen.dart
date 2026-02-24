@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/locale/locale_scope.dart';
 import '../../../core/theme/app_theme.dart';
 import '../controllers/upgrade_controller.dart';
 import '../data/upgrade_data.dart';
@@ -50,7 +51,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                               color: Colors.white, size: 24),
                         ),
                         Text(
-                          'Upgrade to Pro',
+                          context.l10n.upgradeToPro,
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium
@@ -62,7 +63,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                         GestureDetector(
                           onTap: () {},
                           child: Text(
-                            'Restore',
+                            context.l10n.restore,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall
@@ -77,7 +78,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                     const SizedBox(height: 32),
                     // Title
                     Text(
-                      'Choose Your\nSound Experience',
+                      context.l10n.chooseSoundExperience,
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
@@ -90,7 +91,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      'Unlock premium AI models and high-fidelity streaming.',
+                      context.l10n.unlockPremium,
                       textAlign: TextAlign.center,
                       style:
                           Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -107,9 +108,8 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                       ),
                       child: Row(
                         children: [
-                          _buildToggle('Monthly', !_controller.isYearly),
-                          _buildToggle(
-                              'Yearly (Save 20%)', _controller.isYearly),
+                          _buildToggle(context.l10n.monthly, !_controller.isYearly, false),
+                          _buildToggle(context.l10n.yearlyWithDiscount, _controller.isYearly, true),
                         ],
                       ),
                     ),
@@ -136,7 +136,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                     const SizedBox(height: 20),
                     // Terms
                     Text(
-                      'Subscription automatically renews unless canceled at least 24 hours before the end of the current period. Manage in Account Settings.',
+                      context.l10n.subscriptionRenewsNote,
                       textAlign: TextAlign.center,
                       style:
                           Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -149,7 +149,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Terms',
+                          context.l10n.terms,
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall
@@ -160,7 +160,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                         ),
                         const SizedBox(width: 16),
                         Text(
-                          'Privacy Policy',
+                          context.l10n.privacyPolicy,
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall
@@ -206,16 +206,15 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
-                                'Start 7-Day Free Trial',
-                                style: TextStyle(
+                              Text(
+                                context.l10n.startFreeTrial,
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              const Icon(Icons.arrow_forward,
-                                  size: 20),
+                              const Icon(Icons.arrow_forward, size: 20),
                             ],
                           ),
                         ),
@@ -223,7 +222,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      _controller.proPriceLabel,
+                      context.l10n.thenCancelAnytime(_controller.proPrice),
                       style:
                           Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: AppColors.white54,
@@ -240,11 +239,10 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
     );
   }
 
-  Widget _buildToggle(String label, bool active) {
+  Widget _buildToggle(String label, bool active, bool isYearly) {
     return Expanded(
       child: GestureDetector(
-        onTap: () =>
-            _controller.toggleBillingPeriod(label.contains('Yearly')),
+        onTap: () => _controller.toggleBillingPeriod(isYearly),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(vertical: 10),
@@ -346,7 +344,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4),
                 child: Text(
-                  '/month',
+                  context.l10n.perMonth,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.white54,
                       ),

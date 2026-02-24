@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/locale/locale_scope.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../player/presentation/now_playing_screen.dart';
 import '../controllers/library_controller.dart';
@@ -45,7 +46,7 @@ class _LibraryScreenState extends State<LibraryScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Your Library',
+                      context.l10n.yourLibrary,
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall
@@ -84,9 +85,9 @@ class _LibraryScreenState extends State<LibraryScreen>
                   labelStyle:
                       const TextStyle(fontWeight: FontWeight.w600),
                   dividerColor: Colors.transparent,
-                  tabs: const [
-                    Tab(text: 'Creations'),
-                    Tab(text: 'Saved'),
+                  tabs: [
+                    Tab(text: context.l10n.creations),
+                    Tab(text: context.l10n.saved),
                   ],
                 ),
               ),
@@ -148,8 +149,8 @@ class _LibraryScreenState extends State<LibraryScreen>
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    _buildTrackList(),
-                    _buildTrackList(), // same for demo
+                    _buildTrackList(context),
+                    _buildTrackList(context),
                   ],
                 ),
               ),
@@ -209,7 +210,7 @@ class _LibraryScreenState extends State<LibraryScreen>
                                   ),
                             ),
                             Text(
-                              'Playing Now',
+                              context.l10n.playingNow,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall
@@ -253,7 +254,7 @@ class _LibraryScreenState extends State<LibraryScreen>
     );
   }
 
-  Widget _buildTrackList() {
+  Widget _buildTrackList(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       itemCount: LibraryData.tracks.length,

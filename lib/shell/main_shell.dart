@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../core/locale/locale_scope.dart';
 import '../core/theme/app_theme.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/discover/presentation/discover_screen.dart';
@@ -57,12 +58,11 @@ class _MainShellState extends State<MainShell> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildNavItem(Icons.home_rounded, 'Home', 0),
-                  _buildNavItem(Icons.explore_outlined, 'Discover', 1),
-                  _buildNavItem(Icons.bolt_rounded, 'Generate', 2),
-                  _buildNavItem(
-                      Icons.library_music_rounded, 'Library', 3),
-                  _buildNavItem(Icons.settings_outlined, 'Profile', 4),
+                  _buildNavItem(Icons.home_rounded, context.l10n.navHome, 0),
+                  _buildNavItem(Icons.explore_outlined, context.l10n.navDiscover, 1),
+                  _buildNavItem(Icons.bolt_rounded, context.l10n.navGenerate, 2),
+                  _buildNavItem(Icons.library_music_rounded, context.l10n.navLibrary, 3),
+                  _buildNavItem(Icons.settings_outlined, context.l10n.navProfile, 4),
                 ],
               ),
             ),
