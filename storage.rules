@@ -1,0 +1,43 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isAuth() && request.auth.uid == uid;
+    }
+
+    function isImageType() {
+      return request.resource.contentType.matches('image/.*');
+    }
+
+    function isAudioType() {
+      return request.resource.contentType.matches('audio/.*');
+    }
+
+    // Profile avatars: users/{uid}/avatar.*
+    match /users/{userId}/{fileName} {
+      allow read: if isAuth();
+      allow write: if isOwner(userId)
+                   && isImageType()
+                   && request.resource.size < 5 * 1024 * 1024; // 5 MB
+    }
+
+    // AI-generated track audio: tracks/{uid}/{trackId}.{ext}
+    match /tracks/{userId}/{allPaths=**} {
+      allow read: if isAuth();
+      allow write: if isOwner(userId)
+                   && isAudioType()
+                   && request.resource.size < 50 * 1024 * 1024; // 50 MB
+    }
+
+    // Deny everything else
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

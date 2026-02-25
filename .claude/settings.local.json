@@ -9,7 +9,32 @@
       "mcp__stitch__get_screen",
       "WebFetch(domain:contribution.usercontent.google.com)",
       "Bash(flutter pub get:*)",
-      "Bash(flutter analyze:*)"
+      "Bash(flutter analyze:*)",
+      "mcp__plugin_firebase_firebase__firebase_get_environment",
+      "mcp__plugin_firebase_firebase__firebase_create_project",
+      "mcp__plugin_firebase_firebase__firebase_update_environment",
+      "mcp__plugin_firebase_firebase__firebase_create_app",
+      "mcp__plugin_firebase_firebase__firebase_init",
+      "mcp__plugin_firebase_firebase__firebase_get_sdk_config",
+      "Bash(dart pub global list:*)",
+      "Bash(findstr:*)",
+      "Bash(flutterfire configure:*)",
+      "Bash(where:*)",
+      "Bash(dart pub global run:*)",
+      "Bash(dart pub global activate:*)",
+      "Bash(\"C:\\\\Users\\\\Hecteria\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\bin\\\\flutterfire.bat\" configure --project=melodi-music-app --platforms=android --android-package-name=com.example.melodi --yes)",
+      "Bash(flutter pub add:*)",
+      "Bash(flutter build:*)",
+      "Bash(powershell -Command:*)",
+      "mcp__plugin_firebase_firebase__firebase_get_security_rules",
+      "mcp__plugin_firebase_firebase__firebase_validate_security_rules",
+      "Bash(cd \"C:\\\\Users\\\\Hecteria\\\\Desktop\\\\Projeler\\\\Mobile_Projeler\\\\Melodi\" && firebase deploy --only firestore:rules --project melodi-music-app 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\Hecteria\\\\Desktop\\\\Projeler\\\\Mobile_Projeler\\\\Melodi\" && firebase deploy --only storage --project melodi-music-app 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\Hecteria\\\\Desktop\\\\Projeler\\\\Mobile_Projeler\\\\Melodi\" && flutter gen-l10n 2>&1)",
+      "Bash(cd C:\\\\Users\\\\Hecteria\\\\Desktop\\\\Projeler\\\\Mobile_Projeler\\\\Melodi:*)",
+      "Bash(tail:*)",
+      "Bash(cd \"C:\\\\Users\\\\Hecteria\\\\Desktop\\\\Projeler\\\\Mobile_Projeler\\\\Melodi\" && git push origin main 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\Hecteria\\\\Desktop\\\\Projeler\\\\Mobile_Projeler\\\\Melodi\" && git add -A && git commit -m \"$\\(cat <<'EOF'\nchore: add Firebase config, auth feature, services, and design assets\n\n- Firebase config: .firebaserc, firebase.json, firebase_options.dart\n- Firebase rules: firestore.rules, firestore.indexes.json, storage.rules\n- Android: google-services.json\n- Auth feature: lib/features/auth/ \\(AuthController, AuthGate, models\\)\n- Core services: lib/core/services/ \\(AuthScope, DeviceService\\)\n- Design reference screenshots: simple/custom/remix generate, detay\n- Update .claude/settings.local.json\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git push origin main 2>&1)"
     ]
   }
 }

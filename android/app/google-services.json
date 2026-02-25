@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "810911753491",
+    "project_id": "melodi-music-app",
+    "storage_bucket": "melodi-music-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810911753491:android:120b9dd334d865ff4a66e6",
+        "android_client_info": {
+          "package_name": "com.example.melodi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwZ813-d3bgmCFUb8coFgd9VbzcK-yjHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

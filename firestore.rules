@@ -1,0 +1,96 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper functions ──
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isAuth() && request.auth.uid == uid;
+    }
+
+    function incomingData() {
+      return request.resource.data;
+    }
+
+    function existingData() {
+      return resource.data;
+    }
+
+    // ── Devices (credit tracking) ──
+    match /devices/{deviceId} {
+      allow read: if isAuth()
+                  && (resource == null || existingData().currentAuthUid == request.auth.uid);
+      allow create: if isAuth()
+                    && incomingData().currentAuthUid == request.auth.uid
+                    && incomingData().keys().hasAll([
+                         'generationCredits', 'initialCreditsGranted',
+                         'currentAuthUid', 'platform', 'createdAt', 'lastSeenAt'
+                       ]);
+      allow update: if isAuth()
+                    && (existingData().currentAuthUid == request.auth.uid
+                        || incomingData().currentAuthUid == request.auth.uid)
+                    && !incomingData().diff(existingData()).affectedKeys()
+                        .hasAny(['createdAt', 'platform', 'initialCreditsGranted']);
+      allow delete: if false;
+    }
+
+    // ── Users ──
+    match /users/{userId} {
+      allow read: if isAuth();
+      allow create: if isOwner(userId)
+                    && incomingData().keys().hasAll(['displayName', 'email', 'createdAt'])
+                    && incomingData().displayName is string
+                    && incomingData().email is string;
+      allow update: if isOwner(userId)
+                    && !incomingData().diff(existingData()).affectedKeys()
+                        .hasAny(['uid', 'createdAt']);
+      allow delete: if false;
+    }
+
+    // ── Tracks (AI-generated music) ──
+    match /tracks/{trackId} {
+      allow read: if isAuth();
+      allow create: if isAuth()
+                    && incomingData().userId == request.auth.uid
+                    && incomingData().keys().hasAll(['title', 'userId', 'createdAt']);
+      allow update: if isAuth()
+                    && existingData().userId == request.auth.uid
+                    && !incomingData().diff(existingData()).affectedKeys()
+                        .hasAny(['userId', 'createdAt']);
+      allow delete: if isAuth()
+                    && existingData().userId == request.auth.uid;
+    }
+
+
+    // ── Playlists ──
+    match /playlists/{playlistId} {
+      allow read: if isAuth()
+                  && (existingData().userId == request.auth.uid
+                      || existingData().isPublic == true);
+      allow create: if isAuth()
+                    && incomingData().userId == request.auth.uid;
+      allow update: if isAuth()
+                    && existingData().userId == request.auth.uid;
+      allow delete: if isAuth()
+                    && existingData().userId == request.auth.uid;
+    }
+
+    // ── Generations (AI credit usage) ──
+    match /generations/{genId} {
+      allow read: if isAuth()
+                  && existingData().userId == request.auth.uid;
+      allow create: if isAuth()
+                    && incomingData().userId == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // Deny everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
