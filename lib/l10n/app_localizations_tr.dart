@@ -293,4 +293,86 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get navProfile => 'Profil';
+
+  @override
+  String get tabSimple => 'Basit';
+
+  @override
+  String get tabCustom => 'Özel';
+
+  @override
+  String get tabRemix => 'Remix';
+
+  @override
+  String get tabEdit => 'Düzenle';
+
+  @override
+  String get lyricsLabel => 'Sözler';
+
+  @override
+  String get lyricsHint =>
+      'Şarkı sözlerini yaz, enstrümantal için boş bırak...';
+
+  @override
+  String get promptLabel => 'Prompt';
+
+  @override
+  String get promptHint => 'Şarkının promptunu açıkla...';
+
+  @override
+  String get advanceOptions => 'Gelişmiş Seçenekler';
+
+  @override
+  String get resetAll => 'Tümünü Sıfırla';
+
+  @override
+  String get sectionGeneral => 'Genel';
+
+  @override
+  String get sectionThinking => 'Düşünme';
+
+  @override
+  String get durationLabel => 'Süre';
+
+  @override
+  String get durationRange => '(10s-240s)';
+
+  @override
+  String get tempoLabel => 'Tempo';
+
+  @override
+  String get tempoRange => '(30bpm-200bpm)';
+
+  @override
+  String get timeSignatureLabel => 'Zaman İmzası';
+
+  @override
+  String get timeSignatureRange => '(2 veya 3 veya 4 veya 6)';
+
+  @override
+  String get keyLabel => 'Ton';
+
+  @override
+  String get negativeTags => 'Negatif etiket ekle (ör. Balad, Yavaş, Jazz)...';
+
+  @override
+  String get uploadReferenceAudio => 'Referans Ses Yükle';
+
+  @override
+  String get uploadAudio => 'Ses Yükle';
+
+  @override
+  String get uploadAudioSubtitle => 'Veya kütüphaneden sürükle (önerilen)';
+
+  @override
+  String get clearLabel => 'Temizle';
+
+  @override
+  String get creativeLabel => 'Yaratıcı';
+
+  @override
+  String get robustLabel => 'Güçlü';
+
+  @override
+  String get editTabPlaceholder => 'Düzenleme özelliği yakında geliyor';
 }

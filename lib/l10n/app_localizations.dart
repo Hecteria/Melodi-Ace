@@ -637,6 +637,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get navProfile;
+
+  /// No description provided for @tabSimple.
+  ///
+  /// In en, this message translates to:
+  /// **'Simple'**
+  String get tabSimple;
+
+  /// No description provided for @tabCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get tabCustom;
+
+  /// No description provided for @tabRemix.
+  ///
+  /// In en, this message translates to:
+  /// **'Remix'**
+  String get tabRemix;
+
+  /// No description provided for @tabEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get tabEdit;
+
+  /// No description provided for @lyricsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Lyrics'**
+  String get lyricsLabel;
+
+  /// No description provided for @lyricsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write lyrics for the song, or leave blank for instrumental...'**
+  String get lyricsHint;
+
+  /// No description provided for @promptLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Prompt'**
+  String get promptLabel;
+
+  /// No description provided for @promptHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the prompt of the song...'**
+  String get promptHint;
+
+  /// No description provided for @advanceOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Advance Options'**
+  String get advanceOptions;
+
+  /// No description provided for @resetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset All'**
+  String get resetAll;
+
+  /// No description provided for @sectionGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get sectionGeneral;
+
+  /// No description provided for @sectionThinking.
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking'**
+  String get sectionThinking;
+
+  /// No description provided for @durationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get durationLabel;
+
+  /// No description provided for @durationRange.
+  ///
+  /// In en, this message translates to:
+  /// **'(10s-240s)'**
+  String get durationRange;
+
+  /// No description provided for @tempoLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tempo'**
+  String get tempoLabel;
+
+  /// No description provided for @tempoRange.
+  ///
+  /// In en, this message translates to:
+  /// **'(30bpm-200bpm)'**
+  String get tempoRange;
+
+  /// No description provided for @timeSignatureLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Time signature'**
+  String get timeSignatureLabel;
+
+  /// No description provided for @timeSignatureRange.
+  ///
+  /// In en, this message translates to:
+  /// **'(2 or 3 or 4 or 6)'**
+  String get timeSignatureRange;
+
+  /// No description provided for @keyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Key'**
+  String get keyLabel;
+
+  /// No description provided for @negativeTags.
+  ///
+  /// In en, this message translates to:
+  /// **'Add negative tags (e.g. Ballad, Slow, Jazz)...'**
+  String get negativeTags;
+
+  /// No description provided for @uploadReferenceAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Reference Audio'**
+  String get uploadReferenceAudio;
+
+  /// No description provided for @uploadAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Audio'**
+  String get uploadAudio;
+
+  /// No description provided for @uploadAudioSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Or drag from library (recommend)'**
+  String get uploadAudioSubtitle;
+
+  /// No description provided for @clearLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clearLabel;
+
+  /// No description provided for @creativeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Creative'**
+  String get creativeLabel;
+
+  /// No description provided for @robustLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Robust'**
+  String get robustLabel;
+
+  /// No description provided for @editTabPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit feature coming soon'**
+  String get editTabPlaceholder;
 }
 
 class _AppLocalizationsDelegate

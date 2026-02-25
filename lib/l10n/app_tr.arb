@@ -102,5 +102,39 @@
   "navDiscover": "Keşfet",
   "navGenerate": "Oluştur",
   "navLibrary": "Kütüphane",
-  "navProfile": "Profil"
+  "navProfile": "Profil",
+
+  "tabSimple": "Basit",
+  "tabCustom": "Özel",
+  "tabRemix": "Remix",
+  "tabEdit": "Düzenle",
+
+  "lyricsLabel": "Sözler",
+  "lyricsHint": "Şarkı sözlerini yaz, enstrümantal için boş bırak...",
+  "promptLabel": "Prompt",
+  "promptHint": "Şarkının promptunu açıkla...",
+
+  "advanceOptions": "Gelişmiş Seçenekler",
+  "resetAll": "Tümünü Sıfırla",
+  "sectionGeneral": "Genel",
+  "sectionThinking": "Düşünme",
+
+  "durationLabel": "Süre",
+  "durationRange": "(10s-240s)",
+  "tempoLabel": "Tempo",
+  "tempoRange": "(30bpm-200bpm)",
+  "timeSignatureLabel": "Zaman İmzası",
+  "timeSignatureRange": "(2 veya 3 veya 4 veya 6)",
+  "keyLabel": "Ton",
+
+  "negativeTags": "Negatif etiket ekle (ör. Balad, Yavaş, Jazz)...",
+  "uploadReferenceAudio": "Referans Ses Yükle",
+  "uploadAudio": "Ses Yükle",
+  "uploadAudioSubtitle": "Veya kütüphaneden sürükle (önerilen)",
+
+  "clearLabel": "Temizle",
+  "creativeLabel": "Yaratıcı",
+  "robustLabel": "Güçlü",
+
+  "editTabPlaceholder": "Düzenleme özelliği yakında geliyor"
 }

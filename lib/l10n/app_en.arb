@@ -127,5 +127,39 @@
   "navDiscover": "Discover",
   "navGenerate": "Generate",
   "navLibrary": "Library",
-  "navProfile": "Profile"
+  "navProfile": "Profile",
+
+  "tabSimple": "Simple",
+  "tabCustom": "Custom",
+  "tabRemix": "Remix",
+  "tabEdit": "Edit",
+
+  "lyricsLabel": "Lyrics",
+  "lyricsHint": "Write lyrics for the song, or leave blank for instrumental...",
+  "promptLabel": "Prompt",
+  "promptHint": "Describe the prompt of the song...",
+
+  "advanceOptions": "Advance Options",
+  "resetAll": "Reset All",
+  "sectionGeneral": "General",
+  "sectionThinking": "Thinking",
+
+  "durationLabel": "Duration",
+  "durationRange": "(10s-240s)",
+  "tempoLabel": "Tempo",
+  "tempoRange": "(30bpm-200bpm)",
+  "timeSignatureLabel": "Time signature",
+  "timeSignatureRange": "(2 or 3 or 4 or 6)",
+  "keyLabel": "Key",
+
+  "negativeTags": "Add negative tags (e.g. Ballad, Slow, Jazz)...",
+  "uploadReferenceAudio": "Upload Reference Audio",
+  "uploadAudio": "Upload Audio",
+  "uploadAudioSubtitle": "Or drag from library (recommend)",
+
+  "clearLabel": "Clear",
+  "creativeLabel": "Creative",
+  "robustLabel": "Robust",
+
+  "editTabPlaceholder": "Edit feature coming soon"
 }

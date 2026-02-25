@@ -292,4 +292,86 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navProfile => 'Profile';
+
+  @override
+  String get tabSimple => 'Simple';
+
+  @override
+  String get tabCustom => 'Custom';
+
+  @override
+  String get tabRemix => 'Remix';
+
+  @override
+  String get tabEdit => 'Edit';
+
+  @override
+  String get lyricsLabel => 'Lyrics';
+
+  @override
+  String get lyricsHint =>
+      'Write lyrics for the song, or leave blank for instrumental...';
+
+  @override
+  String get promptLabel => 'Prompt';
+
+  @override
+  String get promptHint => 'Describe the prompt of the song...';
+
+  @override
+  String get advanceOptions => 'Advance Options';
+
+  @override
+  String get resetAll => 'Reset All';
+
+  @override
+  String get sectionGeneral => 'General';
+
+  @override
+  String get sectionThinking => 'Thinking';
+
+  @override
+  String get durationLabel => 'Duration';
+
+  @override
+  String get durationRange => '(10s-240s)';
+
+  @override
+  String get tempoLabel => 'Tempo';
+
+  @override
+  String get tempoRange => '(30bpm-200bpm)';
+
+  @override
+  String get timeSignatureLabel => 'Time signature';
+
+  @override
+  String get timeSignatureRange => '(2 or 3 or 4 or 6)';
+
+  @override
+  String get keyLabel => 'Key';
+
+  @override
+  String get negativeTags => 'Add negative tags (e.g. Ballad, Slow, Jazz)...';
+
+  @override
+  String get uploadReferenceAudio => 'Upload Reference Audio';
+
+  @override
+  String get uploadAudio => 'Upload Audio';
+
+  @override
+  String get uploadAudioSubtitle => 'Or drag from library (recommend)';
+
+  @override
+  String get clearLabel => 'Clear';
+
+  @override
+  String get creativeLabel => 'Creative';
+
+  @override
+  String get robustLabel => 'Robust';
+
+  @override
+  String get editTabPlaceholder => 'Edit feature coming soon';
 }
