@@ -374,4 +374,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get editTabPlaceholder => 'Edit feature coming soon';
+
+  @override
+  String get songDescription => 'Song Description';
+
+  @override
+  String get songDescriptionHint => 'Describe the styles of the song...';
+
+  @override
+  String get instrumental => 'Instrumental';
+
+  @override
+  String get uploadOptions => 'Select Audio';
+
+  @override
+  String get pickFromDevice => 'Pick from Device';
+
+  @override
+  String get pickFromLibrary => 'Pick from Library';
+
+  @override
+  String get pickFromLibraryDesc => 'Choose a track from your creations';
 }

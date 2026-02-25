@@ -375,4 +375,25 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get editTabPlaceholder => 'Düzenleme özelliği yakında geliyor';
+
+  @override
+  String get songDescription => 'Şarkı Açıklaması';
+
+  @override
+  String get songDescriptionHint => 'Şarkının tarzını açıkla...';
+
+  @override
+  String get instrumental => 'Enstrümantal';
+
+  @override
+  String get uploadOptions => 'Ses Seç';
+
+  @override
+  String get pickFromDevice => 'Cihazdan Seç';
+
+  @override
+  String get pickFromLibrary => 'Kütüphaneden Seç';
+
+  @override
+  String get pickFromLibraryDesc => 'Oluşturduğun müziklerden seç';
 }

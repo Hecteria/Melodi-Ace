@@ -1,6 +1,8 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../../../core/locale/locale_scope.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../library/data/library_data.dart';
 import '../controllers/creation_controller.dart';
 import '../data/creation_data.dart';
 
@@ -147,7 +149,7 @@ class _ModeTabBar extends StatelessWidget {
 }
 
 // ══════════════════════════════════════════════════════════════════
-// SIMPLE TAB
+// SIMPLE TAB — Song Description + Instrumental toggle
 // ══════════════════════════════════════════════════════════════════
 
 class _SimpleTabContent extends StatelessWidget {
@@ -161,91 +163,78 @@ class _SimpleTabContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(Icons.library_music, color: AppColors.primary, size: 22),
-              const SizedBox(width: 8),
-              Text(
-                context.l10n.createMasterpiece,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-              ),
-            ],
+          _TextAreaCard(
+            label: context.l10n.songDescription,
+            hint: context.l10n.songDescriptionHint,
+            textController: controller.descriptionController,
           ),
-          const SizedBox(height: 8),
-          Text(
-            context.l10n.describeAtmosphere,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(color: AppColors.white54),
-          ),
-          const SizedBox(height: 12),
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.surfaceDark,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
-            ),
-            child: TextField(
-              controller: controller.descriptionController,
-              maxLines: 4,
-              maxLength: CreationData.maxDescriptionLength,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                hintText: context.l10n.trackDescriptionHint,
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.all(16),
-                counterStyle: const TextStyle(color: AppColors.white54),
-              ),
-            ),
-          ),
-          const SizedBox(height: 28),
-          Text(
-            context.l10n.selectGenre,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-          ),
-          const SizedBox(height: 14),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: CreationData.genres.map((genre) {
-              return _ChipButton(
-                label: genre,
-                selected: controller.selectedGenre == genre,
-                onTap: () => controller.selectGenre(genre),
-              );
-            }).toList(),
-          ),
-          const SizedBox(height: 28),
-          Text(
-            context.l10n.musicalMood,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-          ),
-          const SizedBox(height: 14),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: CreationData.moods.map((mood) {
-              return _ChipButton(
-                label: mood,
-                selected: controller.selectedMood == mood,
-                onTap: () => controller.selectMood(mood),
-              );
-            }).toList(),
+          const SizedBox(height: 16),
+          // Instrumental toggle chip
+          _InstrumentalChip(
+            active: controller.instrumental,
+            label: context.l10n.instrumental,
+            onTap: controller.toggleInstrumental,
           ),
           const SizedBox(height: 32),
           _GenerateButton(controller: controller),
           const SizedBox(height: 100),
         ],
+      ),
+    );
+  }
+}
+
+// ── Instrumental chip ─────────────────────────────────────────────
+
+class _InstrumentalChip extends StatelessWidget {
+  const _InstrumentalChip({
+    required this.active,
+    required this.label,
+    required this.onTap,
+  });
+
+  final bool active;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          color: active
+              ? AppColors.primary.withValues(alpha: 0.15)
+              : AppColors.surfaceDark,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: active
+                ? AppColors.primary.withValues(alpha: 0.5)
+                : Colors.white.withValues(alpha: 0.1),
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              active
+                  ? Icons.check_box_rounded
+                  : Icons.check_box_outline_blank_rounded,
+              color: active ? AppColors.primary : AppColors.white54,
+              size: 20,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              label,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: active ? AppColors.primary : Colors.white70,
+                    fontWeight: active ? FontWeight.w600 : FontWeight.w400,
+                  ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -301,7 +290,7 @@ class _RemixTabContent extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          _UploadAudioCard(),
+          _UploadAudioCard(controller: controller),
           const SizedBox(height: 12),
           _TextAreaCard(
             label: context.l10n.lyricsLabel,
@@ -338,7 +327,7 @@ class _EditTabContent extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.edit_note_rounded,
+          const Icon(Icons.edit_note_rounded,
               size: 56, color: AppColors.white30),
           const SizedBox(height: 16),
           Text(
@@ -355,10 +344,10 @@ class _EditTabContent extends StatelessWidget {
 }
 
 // ══════════════════════════════════════════════════════════════════
-// SHARED: TEXT AREA CARD
+// SHARED: RESIZABLE TEXT AREA CARD
 // ══════════════════════════════════════════════════════════════════
 
-class _TextAreaCard extends StatelessWidget {
+class _TextAreaCard extends StatefulWidget {
   const _TextAreaCard({
     required this.label,
     required this.hint,
@@ -368,6 +357,35 @@ class _TextAreaCard extends StatelessWidget {
   final String label;
   final String hint;
   final TextEditingController textController;
+
+  @override
+  State<_TextAreaCard> createState() => _TextAreaCardState();
+}
+
+class _TextAreaCardState extends State<_TextAreaCard> {
+  static const double _minHeight = 90.0;
+  static const double _maxHeight = 340.0;
+
+  double _height = 120.0;
+  bool _isEmpty = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _isEmpty = widget.textController.text.isEmpty;
+    widget.textController.addListener(_onTextChanged);
+  }
+
+  void _onTextChanged() {
+    final isEmpty = widget.textController.text.isEmpty;
+    if (isEmpty != _isEmpty) setState(() => _isEmpty = isEmpty);
+  }
+
+  @override
+  void dispose() {
+    widget.textController.removeListener(_onTextChanged);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -381,12 +399,12 @@ class _TextAreaCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header: label + AI icon
+          // Header: label + AI sparkle icon
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                label,
+                widget.label,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -400,47 +418,62 @@ class _TextAreaCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          // Textarea with orange hint overlay + resize handle
-          ValueListenableBuilder<TextEditingValue>(
-            valueListenable: textController,
-            builder: (context, value, _) => Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                TextField(
-                  controller: textController,
-                  minLines: 4,
-                  maxLines: 8,
+          // Resizable textarea
+          Stack(
+            children: [
+              SizedBox(
+                height: _height,
+                child: TextField(
+                  controller: widget.textController,
+                  maxLines: null,
+                  expands: true,
+                  textAlignVertical: TextAlignVertical.top,
                   style: const TextStyle(color: Colors.white, fontSize: 14),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.zero,
+                    contentPadding: EdgeInsets.only(bottom: 18),
                     isCollapsed: true,
                   ),
                 ),
-                // Orange hint text — visible only when field is empty
-                if (value.text.isEmpty)
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 20,
-                    child: IgnorePointer(
-                      child: Text(
-                        hint,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.primary.withValues(alpha: 0.7),
-                              fontSize: 13,
-                            ),
-                      ),
+              ),
+              // Orange hint overlay — visible only when field is empty
+              if (_isEmpty)
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 20,
+                  child: IgnorePointer(
+                    child: Text(
+                      widget.hint,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: AppColors.primary.withValues(alpha: 0.75),
+                            fontSize: 13,
+                          ),
                     ),
                   ),
-                // Resize handle icon (decorative)
-                Icon(
-                  Icons.open_in_full,
-                  color: AppColors.white30,
-                  size: 13,
                 ),
-              ],
-            ),
+              // Drag-to-resize handle (bottom-right)
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: GestureDetector(
+                  onVerticalDragUpdate: (details) {
+                    setState(() {
+                      _height = (_height + details.delta.dy)
+                          .clamp(_minHeight, _maxHeight);
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Icon(
+                      Icons.open_in_full,
+                      color: AppColors.white30,
+                      size: 13,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -449,66 +482,395 @@ class _TextAreaCard extends StatelessWidget {
 }
 
 // ══════════════════════════════════════════════════════════════════
-// SHARED: UPLOAD AUDIO CARD (Remix tab)
+// SHARED: UPLOAD AUDIO CARD (Remix tab) — functional file picker
 // ══════════════════════════════════════════════════════════════════
 
 class _UploadAudioCard extends StatelessWidget {
-  const _UploadAudioCard();
+  const _UploadAudioCard({required this.controller});
+  final CreationController controller;
 
   @override
   Widget build(BuildContext context) {
+    final hasFile = controller.remixFileName != null;
+
     return GestureDetector(
-      onTap: () {}, // TODO: open file picker
-      child: Container(
+      onTap: () => _showUploadOptions(context),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(vertical: 22),
         decoration: BoxDecoration(
           color: AppColors.surfaceDark,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+          border: Border.all(
+            color: hasFile
+                ? AppColors.primary.withValues(alpha: 0.4)
+                : Colors.white.withValues(alpha: 0.08),
+          ),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.5),
-                  width: 1.5,
-                ),
-              ),
-              child: const Icon(
-                Icons.upload_rounded,
-                color: Colors.white,
-                size: 22,
-              ),
+        child: hasFile
+            ? _buildSelectedContent(context)
+            : _buildUploadPrompt(context),
+      ),
+    );
+  }
+
+  Widget _buildUploadPrompt(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.5),
+              width: 1.5,
             ),
-            const SizedBox(width: 16),
-            Column(
+          ),
+          child: const Icon(Icons.upload_rounded,
+              color: Colors.white, size: 22),
+        ),
+        const SizedBox(width: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              context.l10n.uploadAudio,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
+            ),
+            const SizedBox(height: 3),
+            Text(
+              context.l10n.uploadAudioSubtitle,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: AppColors.white54),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSelectedContent(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          Container(
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              color: AppColors.primary.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                  color: AppColors.primary.withValues(alpha: 0.3)),
+            ),
+            child: const Icon(Icons.audio_file_rounded,
+                color: AppColors.primary, size: 22),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  context.l10n.uploadAudio,
+                  controller.remixFileName!,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.white,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w600,
                       ),
                 ),
-                const SizedBox(height: 3),
+                const SizedBox(height: 2),
                 Text(
-                  context.l10n.uploadAudioSubtitle,
+                  'Tap to change',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
-                      ?.copyWith(color: AppColors.white54),
+                      ?.copyWith(color: AppColors.primary),
                 ),
               ],
             ),
+          ),
+          GestureDetector(
+            onTap: controller.clearRemixFile,
+            child: Icon(Icons.close_rounded,
+                color: AppColors.white54, size: 20),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showUploadOptions(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF1A1A1C),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => _UploadOptionsSheet(controller: controller),
+    );
+  }
+}
+
+// ── Upload options bottom sheet ───────────────────────────────────
+
+class _UploadOptionsSheet extends StatelessWidget {
+  const _UploadOptionsSheet({required this.controller});
+  final CreationController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.white24,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            context.l10n.uploadOptions,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+          ),
+          const SizedBox(height: 16),
+          // Pick from device
+          _OptionTile(
+            icon: Icons.folder_open_rounded,
+            title: context.l10n.pickFromDevice,
+            subtitle: 'MP3, WAV, M4A, FLAC...',
+            onTap: () => _pickFromDevice(context),
+          ),
+          const SizedBox(height: 10),
+          // Pick from library
+          _OptionTile(
+            icon: Icons.library_music_rounded,
+            title: context.l10n.pickFromLibrary,
+            subtitle: context.l10n.pickFromLibraryDesc,
+            onTap: () => _pickFromLibrary(context),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _pickFromDevice(BuildContext context) async {
+    Navigator.pop(context);
+    try {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.audio,
+        allowMultiple: false,
+      );
+      if (result != null && result.files.isNotEmpty) {
+        controller.setRemixFile(result.files.first.name);
+      }
+    } catch (_) {
+      // File picker cancelled or failed — no action needed
+    }
+  }
+
+  void _pickFromLibrary(BuildContext context) {
+    Navigator.pop(context);
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF1A1A1C),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => _LibraryPickerSheet(controller: controller),
+    );
+  }
+}
+
+// ── Option tile ───────────────────────────────────────────────────
+
+class _OptionTile extends StatelessWidget {
+  const _OptionTile({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          color: AppColors.surfaceDark,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(icon, color: AppColors.primary, size: 22),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(color: AppColors.white54),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.chevron_right_rounded,
+                color: AppColors.white54, size: 20),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// ── Library picker bottom sheet ───────────────────────────────────
+
+class _LibraryPickerSheet extends StatelessWidget {
+  const _LibraryPickerSheet({required this.controller});
+  final CreationController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.white24,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            context.l10n.pickFromLibrary,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+          ),
+          const SizedBox(height: 16),
+          ...LibraryData.tracks.map((track) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: GestureDetector(
+                  onTap: () {
+                    controller.setRemixFile(track.title);
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: AppColors.surfaceDark,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.08)),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [
+                                AppColors.chocolate,
+                                AppColors.primary
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(Icons.music_note_rounded,
+                              color: Colors.white, size: 18),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                track.title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              ),
+                              Text(
+                                '${track.model} • ${track.duration}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(color: AppColors.white54),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Icon(Icons.add_rounded,
+                            color: AppColors.primary, size: 22),
+                      ],
+                    ),
+                  ),
+                ),
+              )),
+        ],
       ),
     );
   }
@@ -626,8 +988,8 @@ class _AdvanceOptionsCard extends StatelessWidget {
                     onIncrement: controller.incrementTimeSignature,
                     onClear: controller.clearTimeSignature,
                     isModified: controller.isTimeSignatureModified,
-                    canDecrement: true, // wraps around
-                    canIncrement: true, // wraps around
+                    canDecrement: true,
+                    canIncrement: true,
                   ),
                   const SizedBox(height: 8),
                   _KeyRow(controller: controller),
@@ -650,7 +1012,7 @@ class _AdvanceOptionsCard extends StatelessWidget {
   }
 }
 
-// ── Section label (orange) ────────────────────────────────────────
+// ── Section label ─────────────────────────────────────────────────
 
 class _SectionLabel extends StatelessWidget {
   const _SectionLabel({required this.label});
@@ -669,7 +1031,7 @@ class _SectionLabel extends StatelessWidget {
   }
 }
 
-// ── Stepper row: icon | label (range) | [−] value [+] Clear ──────
+// ── Stepper row ───────────────────────────────────────────────────
 
 class _StepperRow extends StatelessWidget {
   const _StepperRow({
@@ -716,20 +1078,18 @@ class _StepperRow extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: label,
-                    style: const TextStyle(
-                        color: Colors.white, fontSize: 13),
+                    style:
+                        const TextStyle(color: Colors.white, fontSize: 13),
                   ),
                   TextSpan(
                     text: ' $rangeHint',
-                    style: TextStyle(
-                        color: AppColors.white54,
-                        fontSize: 11),
+                    style:
+                        const TextStyle(color: AppColors.white54, fontSize: 11),
                   ),
                 ],
               ),
             ),
           ),
-          // [−]
           GestureDetector(
             onTap: canDecrement ? onDecrement : null,
             child: Padding(
@@ -737,15 +1097,13 @@ class _StepperRow extends StatelessWidget {
               child: Text(
                 '−',
                 style: TextStyle(
-                  color:
-                      canDecrement ? Colors.white : AppColors.white30,
+                  color: canDecrement ? Colors.white : AppColors.white30,
                   fontSize: 22,
                   fontWeight: FontWeight.w300,
                 ),
               ),
             ),
           ),
-          // value
           SizedBox(
             width: 36,
             child: Text(
@@ -758,7 +1116,6 @@ class _StepperRow extends StatelessWidget {
               ),
             ),
           ),
-          // [+]
           GestureDetector(
             onTap: canIncrement ? onIncrement : null,
             child: Padding(
@@ -766,23 +1123,19 @@ class _StepperRow extends StatelessWidget {
               child: Text(
                 '+',
                 style: TextStyle(
-                  color:
-                      canIncrement ? Colors.white : AppColors.white30,
+                  color: canIncrement ? Colors.white : AppColors.white30,
                   fontSize: 22,
                   fontWeight: FontWeight.w300,
                 ),
               ),
             ),
           ),
-          // Clear
           GestureDetector(
             onTap: onClear,
             child: Text(
               context.l10n.clearLabel,
               style: TextStyle(
-                color: isModified
-                    ? AppColors.white54
-                    : AppColors.white30,
+                color: isModified ? AppColors.white54 : AppColors.white30,
                 fontSize: 12,
               ),
             ),
@@ -793,7 +1146,7 @@ class _StepperRow extends StatelessWidget {
   }
 }
 
-// ── Key row: icon | Key | [<] value [>] | Clear ───────────────────
+// ── Key row ───────────────────────────────────────────────────────
 
 class _KeyRow extends StatelessWidget {
   const _KeyRow({required this.controller});
@@ -824,8 +1177,7 @@ class _KeyRow extends StatelessWidget {
             onTap: controller.prevKey,
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 4),
-              child: Icon(Icons.chevron_left,
-                  color: Colors.white, size: 22),
+              child: Icon(Icons.chevron_left, color: Colors.white, size: 22),
             ),
           ),
           SizedBox(
@@ -844,8 +1196,8 @@ class _KeyRow extends StatelessWidget {
             onTap: controller.nextKey,
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 4),
-              child: Icon(Icons.chevron_right,
-                  color: Colors.white, size: 22),
+              child:
+                  Icon(Icons.chevron_right, color: Colors.white, size: 22),
             ),
           ),
           const SizedBox(width: 4),
@@ -894,8 +1246,8 @@ class _NegativeTagsRow extends StatelessWidget {
               style: const TextStyle(color: Colors.white, fontSize: 13),
               decoration: InputDecoration(
                 hintText: context.l10n.negativeTags,
-                hintStyle: const TextStyle(
-                    color: AppColors.white30, fontSize: 13),
+                hintStyle:
+                    const TextStyle(color: AppColors.white30, fontSize: 13),
                 border: InputBorder.none,
                 isCollapsed: true,
                 contentPadding: EdgeInsets.zero,
@@ -934,7 +1286,7 @@ class _UploadReferenceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {}, // TODO: open file picker
+      onTap: () {}, // TODO: wire to file picker when needed
       child: Container(
         height: 48,
         decoration: BoxDecoration(
@@ -1016,58 +1368,6 @@ class _ThinkingSlider extends StatelessWidget {
             style: const TextStyle(color: Colors.white, fontSize: 12),
           ),
         ],
-      ),
-    );
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════
-// SHARED: CHIP BUTTON
-// ══════════════════════════════════════════════════════════════════
-
-class _ChipButton extends StatelessWidget {
-  const _ChipButton({
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
-
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        decoration: BoxDecoration(
-          color: selected ? AppColors.primary : AppColors.surfaceDark,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: selected
-                ? AppColors.primary
-                : Colors.white.withValues(alpha: 0.12),
-          ),
-          boxShadow: selected
-              ? [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.3),
-                    blurRadius: 12,
-                  ),
-                ]
-              : null,
-        ),
-        child: Text(
-          label,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: selected ? Colors.white : Colors.white70,
-                fontWeight:
-                    selected ? FontWeight.w600 : FontWeight.w400,
-              ),
-        ),
       ),
     );
   }

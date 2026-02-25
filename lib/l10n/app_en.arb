@@ -161,5 +161,14 @@
   "creativeLabel": "Creative",
   "robustLabel": "Robust",
 
-  "editTabPlaceholder": "Edit feature coming soon"
+  "editTabPlaceholder": "Edit feature coming soon",
+
+  "songDescription": "Song Description",
+  "songDescriptionHint": "Describe the styles of the song...",
+  "instrumental": "Instrumental",
+
+  "uploadOptions": "Select Audio",
+  "pickFromDevice": "Pick from Device",
+  "pickFromLibrary": "Pick from Library",
+  "pickFromLibraryDesc": "Choose a track from your creations"
 }

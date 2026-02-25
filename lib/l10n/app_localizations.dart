@@ -799,6 +799,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit feature coming soon'**
   String get editTabPlaceholder;
+
+  /// No description provided for @songDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Song Description'**
+  String get songDescription;
+
+  /// No description provided for @songDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the styles of the song...'**
+  String get songDescriptionHint;
+
+  /// No description provided for @instrumental.
+  ///
+  /// In en, this message translates to:
+  /// **'Instrumental'**
+  String get instrumental;
+
+  /// No description provided for @uploadOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Audio'**
+  String get uploadOptions;
+
+  /// No description provided for @pickFromDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick from Device'**
+  String get pickFromDevice;
+
+  /// No description provided for @pickFromLibrary.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick from Library'**
+  String get pickFromLibrary;
+
+  /// No description provided for @pickFromLibraryDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a track from your creations'**
+  String get pickFromLibraryDesc;
 }
 
 class _AppLocalizationsDelegate

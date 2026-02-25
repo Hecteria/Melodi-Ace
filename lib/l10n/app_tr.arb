@@ -136,5 +136,14 @@
   "creativeLabel": "Yaratıcı",
   "robustLabel": "Güçlü",
 
-  "editTabPlaceholder": "Düzenleme özelliği yakında geliyor"
+  "editTabPlaceholder": "Düzenleme özelliği yakında geliyor",
+
+  "songDescription": "Şarkı Açıklaması",
+  "songDescriptionHint": "Şarkının tarzını açıkla...",
+  "instrumental": "Enstrümantal",
+
+  "uploadOptions": "Ses Seç",
+  "pickFromDevice": "Cihazdan Seç",
+  "pickFromLibrary": "Kütüphaneden Seç",
+  "pickFromLibraryDesc": "Oluşturduğun müziklerden seç"
 }

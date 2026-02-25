@@ -32,6 +32,29 @@ class CreationController extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ── Simple tab — instrumental toggle ─────────────────────────
+  bool _instrumental = false;
+  bool get instrumental => _instrumental;
+
+  void toggleInstrumental() {
+    _instrumental = !_instrumental;
+    notifyListeners();
+  }
+
+  // ── Remix tab — selected audio file ──────────────────────────
+  String? _remixFileName;
+  String? get remixFileName => _remixFileName;
+
+  void setRemixFile(String name) {
+    _remixFileName = name;
+    notifyListeners();
+  }
+
+  void clearRemixFile() {
+    _remixFileName = null;
+    notifyListeners();
+  }
+
   // ── Custom & Remix text fields ────────────────────────────────
   final TextEditingController lyricsController = TextEditingController();
   final TextEditingController promptController = TextEditingController();
